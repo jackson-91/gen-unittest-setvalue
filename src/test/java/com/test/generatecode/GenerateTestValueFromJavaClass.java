@@ -70,19 +70,19 @@ public class GenerateTestValueFromJavaClass {
         Student student;
         Score score;
         score = new Score();
-        score.setMath(21);
-        score.setEng(41);
+        score.setMath(1);
+        score.setEng(31);
         student = new Student(score,"hello");
         student.setStudentNo("hello");
         student.setStudentName("hello");
         student.setSex(SexEnum.M);
-        student.setAge(16);
+        student.setAge(7);
         student.setAddress("hello");
         student.setPosition(PositionEnum.MONITOR);
         Score score1;
         score1 = new Score();
-        score1.setMath(94);
-        score1.setEng(14);
+        score1.setMath(73);
+        score1.setEng(39);
         student.setScore(score1);
         List list;
         list = new ArrayList(10);
@@ -184,7 +184,6 @@ public class GenerateTestValueFromJavaClass {
         list3.add(string8);
         course2.setCourseName(list3);
         list.add(course2);
-
 
         return JSON.toJSONString(list);
     }

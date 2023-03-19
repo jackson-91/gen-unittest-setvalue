@@ -24,8 +24,6 @@ public class DefaultListGenerator {
         String declareString = listGenerator.declareList(javaClass.getSimpleName(), objectName);
         String listConstrctString = listGenerator.constructDefaultList(objectName, 10);
 
-//        listGenerator.generateElement(javaClass.ge)
-
         String objectGenString = listGenerator.generateElement(genericType, objectName, 3);
 
         return declareString + listConstrctString + objectGenString;

@@ -33,7 +33,9 @@ public class ObjectGenerator implements RefObjectGenerator {
     private static ListGenerator listGenerator = new ListGenerator();
 
 
+    public static final String DECLARE_TEMPLATE = "${typeName} ${objectName}";
 
+    public static final String CONSTRUCT_TEMPLATE = "${objectName} = new ${typeName}(${fieldValue})";
 
     @Override
     public String generateFieldValue(Class javaClass, String objectName) throws ClassNotFoundException {
@@ -129,7 +131,9 @@ public class ObjectGenerator implements RefObjectGenerator {
     }
 
     private String appendInitString(String objectName, String fieldName, String fieldValue, WriterString writerString, Set<String> setterMethodSet) {
+
         String fieldSetterMethod = "set"+fieldName.substring(0, 1).toUpperCase()+fieldName.substring(1);
+
         if (setterMethodSet.contains(fieldSetterMethod)) {
             return writerString.writeStringInSetMode(objectName, fieldSetterMethod, fieldValue);
         } else {
@@ -144,7 +148,8 @@ public class ObjectGenerator implements RefObjectGenerator {
 
 
     public String declareObject(String type, String objectName) {
-        return type + " " + objectName + LINE_SEPARATOR ;
+        String replace = DECLARE_TEMPLATE.replace(ObjectUtils.TYPE_NAME, type).replace(ObjectUtils.OBJECT_NAME, objectName);
+        return replace + LINE_SEPARATOR ;
     }
 
 
@@ -169,6 +174,9 @@ public class ObjectGenerator implements RefObjectGenerator {
 
     private String constructObject(String objectTypeName, String objectName, List<String> constructorFields) {
         String join = String.join(",", constructorFields);
-        return objectName + " = " + "new " + objectTypeName + "(" + join + ")" + LINE_SEPARATOR;
+        String replace = CONSTRUCT_TEMPLATE.replace(ObjectUtils.OBJECT_NAME, objectName)
+                .replace(ObjectUtils.TYPE_NAME, objectTypeName)
+                .replace(ObjectUtils.FIELD_VALUE, join);
+        return replace + LINE_SEPARATOR;
     }
 }

@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class ImportPackageUtil {
 
+    public static final String FULL_CLASS_NAME = "${fullClassName}";
+
     private static Set<String> importStringSet = new HashSet<>();
     private static FieldValueGenerator importGenerator = new ImportGenerator();
 
